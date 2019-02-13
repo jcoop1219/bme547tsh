@@ -1,6 +1,2 @@
-numpy
-scipy
-jupyter
-ipython
 pytest
 pytest-pep8
