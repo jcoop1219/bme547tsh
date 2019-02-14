@@ -34,6 +34,7 @@ def fileToDict(dataFile):
             tshList = line.lstrip("TSH,").rstrip("\n").split(",")
             for idx, item in enumerate(tshList):
                 tshList[idx] = float(item)
+            tshList.sort()  # sorts list of TSH values from low to high
             personDict = storeToDict(personDict, personNum, firstName,
                                      lastName, age, gender, tshList)
     return personDict
