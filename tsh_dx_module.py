@@ -16,6 +16,10 @@ def readFile:
             age = int(line.rstrip("\n"))
         elif lineType == 3: # gender line
             gender = line.rstrip("\n")
+        else: # TSH line
+            tshList = line.lstrip("TSH,").rstrip("\n").split(",")
+            for idx, item in enumerate(tshList):
+                tshList[idx] = float(item)
 
 
 if __name__ == "__main__":
