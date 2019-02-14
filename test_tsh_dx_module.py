@@ -20,5 +20,5 @@ case3 = "hypothyroidism"
                         (personDict[8]["Diagnosis"], case3),
                         (personDict[9]["Diagnosis"], case2),
                         ])
-def test_main(diagnosis, expectedDx):
+def test_calculateDx(diagnosis, expectedDx):
     assert diagnosis == expectedDx
