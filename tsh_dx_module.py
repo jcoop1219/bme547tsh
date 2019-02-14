@@ -1,7 +1,9 @@
 def main():
     fileName = "test_data.txt"
+    jsonDir = "JSONfiles"
     personDict = createDict(fileName)
     personDict = calculateDx(personDict)
+    outputToJSON(personDict, jsonDir)
     return personDict
 
 
@@ -47,6 +49,24 @@ def calculateDx(personDict):
                 diagnosis = "hypothyroidism"
         person["Diagnosis"] = diagnosis
     return personDict
+
+
+def outputToJSON(personDict, jsonDir):
+    import json
+    makeDirectory(jsonDir)
+    for person in personDict:
+        firstName = person["First Name"]
+        lastName = person["Last Name"]
+        fileName = firstName + "-" + lastName + ".json"
+        outFile = open(fileName, "w")
+        json.dump(person, outFile)
+        outFile.close
+
+
+def makeDirectory(jsonDir):
+    import os
+    os.mkdir(jsonDir)
+    os.chdir(jsonDir)
 
 if __name__ == "__main__":
     main()
