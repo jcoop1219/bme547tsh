@@ -1,14 +1,19 @@
 def main():
-    fileName = "test_data.txt"
+    inFile = "test_data.txt"
     jsonDir = "JSONfiles"
-    personDict = createDict(fileName)
+    dataFile = readFile(inFile)
+    personDict = fileToDict(dataFile)
     personDict = calculateDx(personDict)
     outputToJSON(personDict, jsonDir)
     return personDict
 
 
-def createDict(fileName):
-    dataFile = open(fileName, "r")
+def readFile(inFile):
+    dataFile = open(inFile, "r")
+    return dataFile
+
+
+def fileToDict(dataFile):
     lineCount = 0
     personNum = -1
     personDict = []
@@ -22,24 +27,31 @@ def createDict(fileName):
             personDict.append({})
             firstName = line.rstrip("\n").split(" ")[0]
             lastName = line.rstrip("\n").split(" ")[1]
-            personDict[personNum]["First Name"] = firstName
-            personDict[personNum]["Last Name"] = lastName
         elif lineType == 2:  # age line
             age = int(line.rstrip("\n"))
-            personDict[personNum]["Age"] = age
         elif lineType == 3:  # gender line
             gender = line.rstrip("\n")
-            personDict[personNum]["Gender"] = gender
         else:  # TSH line
             tshList = line.lstrip("TSH,").rstrip("\n").split(",")
             for idx, item in enumerate(tshList):
                 tshList[idx] = float(item)
-            personDict[personNum]["TSH"] = tshList
+            personDict = storeToDict(personDict, personNum, firstName,
+                                     lastName, age, gender, tshList)
+    return personDict
+
+
+def storeToDict(personDict, personNum, firstName,
+                lastName, age, gender, tshList):
+    personDict[personNum]["First Name"] = firstName
+    personDict[personNum]["Last Name"] = lastName
+    personDict[personNum]["Age"] = age
+    personDict[personNum]["Gender"] = gender
+    personDict[personNum]["TSH"] = tshList
     return personDict
 
 
 def calculateDx(personDict):
-    for idx, person in enumerate(personDict):
+    for person in personDict:
         tshList = person["TSH"]
         diagnosis = "normal thyroid function"
         for tshVal in tshList:
@@ -65,7 +77,8 @@ def outputToJSON(personDict, jsonDir):
 
 def makeDirectory(jsonDir):
     import os
-    os.mkdir(jsonDir)
+    if os.path.isdir(jsonDir) is False:
+        os.mkdir(jsonDir)
     os.chdir(jsonDir)
 
 if __name__ == "__main__":
