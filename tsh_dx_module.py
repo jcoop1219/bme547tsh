@@ -5,7 +5,6 @@ def main():
     personDict = fileToDict(dataFile)
     personDict = calculateDx(personDict)
     outputToJSON(personDict, jsonDir)
-    return personDict
 
 
 def readFile(inFile):

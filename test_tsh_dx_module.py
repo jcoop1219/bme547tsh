@@ -1,8 +1,14 @@
 import pytest
-from tsh_dx_module import main
+import tsh_dx_module as tsh
+
+# Populating dictionary with data for testing
+inFile = "test_data.txt"
+jsonDir = "JSONfiles"
+dataFile = tsh.readFile(inFile)
+personDict = tsh.fileToDict(dataFile)
+personDict = tsh.calculateDx(personDict)
 
 # Setting up test cases for parametrize decorator
-personDict = main()
 case1 = "normal thyroid function"
 case2 = "hyperthyroidism"
 case3 = "hypothyroidism"
