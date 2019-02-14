@@ -1,6 +1,7 @@
 def main():
     fileName = "test_data.txt"
     personDict = createDict(fileName)
+    calculateDx(personDict)
 
 
 def createDict(fileName):
@@ -32,6 +33,18 @@ def createDict(fileName):
                 tshList[idx] = float(item)
             personDict[personNum]["TSH"] = tshList
     return personDict
+
+
+def calculateDx(personDict):
+    for idx, person in enumerate(personDict):
+        tshList = person["TSH"]
+        diagnosis = "normal thyroid function"
+        for tshVal in tshList:
+            if tshVal < 1.0:
+                diagnosis = "hyperthyroidism"
+            elif tshVal > 4.0:
+                diagnosis = "hypothyroidism"
+        person["Diagnosis"] = diagnosis
 
 if __name__ == "__main__":
     main()
