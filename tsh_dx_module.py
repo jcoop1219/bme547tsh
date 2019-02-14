@@ -1,7 +1,7 @@
-def main:
-    dataFile = open("test_data.txt", "r")
+def main():
+    readFile()
 
-def readFile:
+def readFile():
     dataFile = open("test_data.txt", "r")
     lineCount = 0
     for line in dataFile:
