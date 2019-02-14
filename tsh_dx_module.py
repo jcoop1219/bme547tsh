@@ -1,6 +1,6 @@
 def main():
-    inFile = "test_data.txt"
-    jsonDir = "JSONfiles"
+    inFile = "test_data.txt"  # file to be read
+    jsonDir = "JSONfiles"  # directory to store output JSON files
     dataFile = readFile(inFile)
     personDictList = fileToDict(dataFile)
     personDictList = calculateDx(personDictList)
