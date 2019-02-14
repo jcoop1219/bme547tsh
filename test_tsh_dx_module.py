@@ -5,8 +5,8 @@ import tsh_dx_module as tsh
 inFile = "test_data.txt"
 jsonDir = "JSONfiles"
 dataFile = tsh.readFile(inFile)
-personDict = tsh.fileToDict(dataFile)
-personDict = tsh.calculateDx(personDict)
+personDictList = tsh.fileToDict(dataFile)
+personDictList = tsh.calculateDx(personDictList)
 
 # Setting up test cases for parametrize decorator
 case1 = "normal thyroid function"
