@@ -1,7 +1,8 @@
 def main():
     fileName = "test_data.txt"
     personDict = createDict(fileName)
-    calculateDx(personDict)
+    personDict = calculateDx(personDict)
+    return personDict
 
 
 def createDict(fileName):
@@ -45,6 +46,7 @@ def calculateDx(personDict):
             elif tshVal > 4.0:
                 diagnosis = "hypothyroidism"
         person["Diagnosis"] = diagnosis
+    return personDict
 
 if __name__ == "__main__":
     main()
